@@ -6,16 +6,12 @@ import jdk.incubator.http.HttpResponse;
 
 import java.io.IOException;
 import java.net.URI;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Random;
-import java.util.concurrent.CompletableFuture;
-import java.util.stream.Collectors;
 
 public class HTTP1_BLOCKING {
 
     public static void main(String[] args) throws IOException, InterruptedException {
+        URI TEST_URI = URI.create("https://www.google.com/");
+
         HttpClient client = HttpClient
                 .newBuilder()
                 .version(HttpClient.Version.HTTP_2)
@@ -24,7 +20,7 @@ public class HTTP1_BLOCKING {
         //HTTP1_BLOCKING Mode
         HttpResponse<String> response = client.send(
                 HttpRequest
-                        .newBuilder(URI.create("http://google.com"))
+                        .newBuilder(TEST_URI)
                         .GET()
                         .build(),
                 HttpResponse.BodyHandler.asString()

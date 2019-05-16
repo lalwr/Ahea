@@ -4,7 +4,6 @@ import jdk.incubator.http.HttpClient;
 import jdk.incubator.http.HttpRequest;
 import jdk.incubator.http.HttpResponse;
 
-import java.io.IOException;
 import java.net.URI;
 import java.util.Map;
 import java.util.Optional;
@@ -13,6 +12,9 @@ import java.util.concurrent.CompletableFuture;
 public class HTTP2_PUSH {
 
     public static void main(String[] args) {
+        URI TEST_URI = URI.create("https://www.google.com/");
+        String TEST_MESSAGE = "MESSAGE";
+
         HttpClient client = HttpClient
                 .newBuilder()
                 .version(HttpClient.Version.HTTP_2)
@@ -20,8 +22,8 @@ public class HTTP2_PUSH {
 
         Map< HttpRequest, CompletableFuture< HttpResponse<String>>> responses =
                 client.sendAsync(
-                        HttpRequest.newBuilder(URI.create("http://google.com"))
-                                .GET()
+                        HttpRequest.newBuilder(TEST_URI)
+                                .POST(HttpRequest.BodyProcessor.fromString(TEST_MESSAGE))
                                 .build(),
                         HttpResponse.MultiProcessor.asMap(request -> Optional.of(HttpResponse.BodyHandler.asString()))
                 ).join();
