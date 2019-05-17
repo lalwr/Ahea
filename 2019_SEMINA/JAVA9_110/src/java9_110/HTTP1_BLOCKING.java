@@ -17,7 +17,6 @@ public class HTTP1_BLOCKING {
                 .version(HttpClient.Version.HTTP_2)
                 .build();
 
-        //HTTP1_BLOCKING Mode
         HttpResponse<String> response = client.send(
                 HttpRequest
                         .newBuilder(TEST_URI)
@@ -26,7 +25,7 @@ public class HTTP1_BLOCKING {
                 HttpResponse.BodyHandler.asString()
         );
         System.out.println("Status code = " + response.statusCode());
-        String body = response.body().toString();
+        String body = response.body();
         System.out.println(body);
 
     }
