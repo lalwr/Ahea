@@ -3,7 +3,7 @@ public class JAVA12_swtich {
     public static void main(String[] args) {
 
         var ahea = "play";
-        var result = switch(ahea) {
+        String result = switch(ahea) {
             case "study", "play" -> "eat";
             case "eat" -> "eat";
         };
